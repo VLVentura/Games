@@ -10,6 +10,9 @@ import util.utils as utils
 from model.entities.snake import Snake
 from model.entities.food import Food
 from model.gui.button import Button
+from db.database import Database
+from model.gui.getname import Box
+import model.gui.confirm as confirm
 
 class Game:
 
@@ -26,6 +29,8 @@ class Game:
             print(error)
             exit()
 
+        self.db = Database()
+        
         self.window = pygame.display.set_mode((Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT))
         pygame.mixer.music.set_volume(0.1)
 
@@ -35,6 +40,7 @@ class Game:
         self.optionsButton = Button(self.window, (color.DARK_GREEN, color.LIGHT_GREEN), 'Score',  (200, 280, 100, 50), self.score)
         self.quitButton = Button(self.window, (color.DARK_YELLOW, color.LIGHT_YELLOW), 'Quit',  (200, 360, 100, 50), self.quit_game)
         self.backMenuButton = Button(self.window, (color.DARK_GREEN, color.LIGHT_GREEN), 'Back',  (30, 420, 100, 50), self.back_menu)
+        self.resetButton = Button(self.window, (color.DARK_BLUE, color.LIGHT_BLUE), 'Reset',  (370, 420, 100, 50), self.reset_score)
 
         self.fps = 15
         self.runMenu = True
@@ -84,6 +90,8 @@ class Game:
             self.check_collision()
             self.redraw_window()
         
+        box = Box(self.score)
+        self.db.insert(box.name, self.score)
         self.play_music('sounds/menu_music.mp3')
         self.runPlay = True
         self.snake = Snake(utils.get_pos())
@@ -103,10 +111,23 @@ class Game:
             self.window.fill(color.BLACK)
             self.window.blit(self.text, self.textRectangle)
 
+            self.text, self.textRectangle = utils.text_object((Game.WINDOW_WIDTH // 3, Game.WINDOW_HEIGHT // 3), 'Player', 40, color.GREY)
+            self.window.blit(self.text, self.textRectangle)
+
+            self.text, self.textRectangle = utils.text_object((Game.WINDOW_WIDTH - 180, Game.WINDOW_HEIGHT // 3), 'Score', 40, color.GREY)
+            self.window.blit(self.text, self.textRectangle)
+
+            for i, data in enumerate(self.db.read()):
+                self.text, self.textRectangle = utils.text_object((Game.WINDOW_WIDTH // 3, Game.WINDOW_HEIGHT // 3 + (i + 1) * 40), str(data[0]), 30, color.RED)
+                self.window.blit(self.text, self.textRectangle)
+
+                self.text, self.textRectangle = utils.text_object((Game.WINDOW_WIDTH - 180, Game.WINDOW_HEIGHT // 3 + (i + 1) * 40), str(data[1]), 30, color.RED)
+                self.window.blit(self.text, self.textRectangle)
+                
             self.mouse = pygame.mouse.get_pos()
             self.click = pygame.mouse.get_pressed()
-            self.draw_buttons(self.backMenuButton)
-            self.buttons_actions(self.backMenuButton)
+            self.draw_buttons(self.backMenuButton, self.resetButton)
+            self.buttons_actions(self.backMenuButton, self.resetButton)
             
             pygame.display.update()
         
@@ -118,6 +139,9 @@ class Game:
 
     def back_menu(self):
         self.runOptions = False
+    
+    def reset_score(self):
+        confirm.display(self.db)
     
     def check_event(self, func='main'):
         for event in pygame.event.get():
@@ -171,6 +195,7 @@ class Game:
         pygame.mixer.music.stop()
 
     def close_all(self):
+        self.db.close()
         pygame.mixer.quit()
         pygame.font.quit()
         pygame.quit()
