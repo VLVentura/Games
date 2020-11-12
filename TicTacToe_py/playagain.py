@@ -9,6 +9,8 @@ def display_question(winner, mode=None):
     else:
         msg = 'Winner of the match was {}!\nDo you want to play again?'.format(winner)
     
+    root.withdraw()
+
     msgBox = messagebox.askquestion('Play Again', message=msg, icon='question')
     if msgBox == 'no':
         ans = False
