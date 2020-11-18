@@ -11,7 +11,7 @@ class Player:
     CHAR = util.CHAR
 
     def __init__(self, name, player):
-        self.name = name
+        self.name = name.capitalize()
         self.player = player
         self.score = 0
         self.mark = Player.MARK[self.player]
