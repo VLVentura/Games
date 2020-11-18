@@ -47,19 +47,19 @@ class Game:
             'cpuhard': self.runCpuHard
         }
 
-        self.playButton = Button(self.window, (color.BLACK, color.WHITE), 'Play', (200, 200, 140, 50), self.play_menu)
-        self.scoreBoardButton = Button(self.window, (color.BLACK, color.WHITE), 'Score', (200, 280, 140, 50), self.score_board)
-        self.matchHistoryButton = Button(self.window, (color.BLACK, color.WHITE), 'History', (200, 360, 140, 50), self.match_history)
-        self.quitButton = Button(self.window, (color.BLACK, color.WHITE), 'Quit', (200, 440, 140, 50), self.quit_game)
-        self.pvpButton = Button(self.window, (color.BLACK, color.WHITE), 'PvP', (200, 180, 140, 50), self.one_vs_one)
-        self.cpuEasyButton = Button(self.window, (color.BLACK, color.WHITE), 'CPU Easy', (200, 260, 140, 50), self.cpu_easy)
-        self.cpuHardButton = Button(self.window, (color.BLACK, color.WHITE), 'CPU Hard', (200, 340, 140, 50), self.cpu_hard)
-        self.onlineLocalButton = Button(self.window, (color.BLACK, color.WHITE), 'Online', (200, 420, 140, 50), self.online_local)
-        self.backMenuButtonFromPlay = Button(self.window, (color.BLACK, color.WHITE), 'Back',  (30, 445, 100, 50), self.back_menu_play)
-        self.backMenuButtonFromScore = Button(self.window, (color.BLACK, color.WHITE), 'Back',  (30, 445, 100, 50), self.back_menu_score)
-        self.backMenuButtonFromHistory = Button(self.window, (color.BLACK, color.WHITE), 'Back',  (30, 445, 100, 50), self.back_menu_history)
-        self.resetButtonScore = Button(self.window, (color.BLACK, color.WHITE), 'Reset',  (370, 445, 100, 50), self.reset_score)
-        self.resetButtonHistory = Button(self.window, (color.BLACK, color.WHITE), 'Reset',  (370, 445, 100, 50), self.reset_history)
+        self.playButton = Button(self.window, (color.DARK_BLUE, color.SOFT_BLUE), 'Play', (200, 200, 140, 50), self.play_menu)
+        self.scoreBoardButton = Button(self.window, (color.DARK_BLUE, color.SOFT_BLUE), 'Score', (200, 280, 140, 50), self.score_board)
+        self.matchHistoryButton = Button(self.window, (color.DARK_BLUE, color.SOFT_BLUE), 'History', (200, 360, 140, 50), self.match_history)
+        self.quitButton = Button(self.window, (color.DARK_BLUE, color.SOFT_BLUE), 'Quit', (200, 440, 140, 50), self.quit_game)
+        self.pvpButton = Button(self.window, (color.DARK_BLUE, color.SOFT_BLUE), 'PvP', (200, 180, 140, 50), self.one_vs_one)
+        self.cpuEasyButton = Button(self.window, (color.DARK_BLUE, color.SOFT_BLUE), 'CPU Easy', (200, 260, 140, 50), self.cpu_easy)
+        self.cpuHardButton = Button(self.window, (color.DARK_BLUE, color.SOFT_BLUE), 'CPU Hard', (200, 340, 140, 50), self.cpu_hard)
+        self.onlineLocalButton = Button(self.window, (color.DARK_BLUE, color.SOFT_BLUE), 'Online', (200, 420, 140, 50), self.online_local)
+        self.backMenuButtonFromPlay = Button(self.window, (color.DARK_BLUE, color.SOFT_BLUE), 'Back',  (30, 445, 100, 50), self.back_menu_play)
+        self.backMenuButtonFromScore = Button(self.window, (color.DARK_BLUE, color.SOFT_BLUE), 'Back',  (30, 445, 100, 50), self.back_menu_score)
+        self.backMenuButtonFromHistory = Button(self.window, (color.DARK_BLUE, color.SOFT_BLUE), 'Back',  (30, 445, 100, 50), self.back_menu_history)
+        self.resetButtonScore = Button(self.window, (color.DARK_BLUE, color.SOFT_BLUE), 'Reset',  (370, 445, 100, 50), self.reset_score)
+        self.resetButtonHistory = Button(self.window, (color.DARK_BLUE, color.SOFT_BLUE), 'Reset',  (370, 445, 100, 50), self.reset_history)
 
     def init(self):
         self.menu()
