@@ -3,7 +3,7 @@ try:
 except ModuleNotFoundError as error:
     print(error)
 
-import util
+import util.utils as util
 
 class Player:
     

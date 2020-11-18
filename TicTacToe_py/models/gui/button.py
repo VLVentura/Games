@@ -3,8 +3,8 @@ try:
 except ModuleNotFoundError as error:
     print(error)
 
-import color 
-import util
+import util.color as color
+import util.utils as util
 
 class Button:
     def __init__(self, window, clr, text, pos, function):

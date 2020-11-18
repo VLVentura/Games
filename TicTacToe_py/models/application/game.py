@@ -3,14 +3,14 @@ try:
 except ModuleNotFoundError as error:
     print(error)
 
-import color
-import util
-import playagain
-from board import Board
-from player import Player
-from cpu import Cpu
-from boxname import DoubleBox, SimpleBox
-from button import Button
+import util.color as color
+import util.utils as util
+import models.gui.playagain as playagain
+from models.gui.boxname import DoubleBox, SimpleBox
+from models.gui.button import Button
+from models.entities.board import Board
+from models.entities.player import Player
+from models.entities.cpu import Cpu
 
 class Game:
 
