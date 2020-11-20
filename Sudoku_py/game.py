@@ -35,20 +35,21 @@ class Game:
                     n = 1
                 pygame.draw.line(self.window, color.LIGHT_BLUE, (0, i * 60), (600, i * 60), n)
                 pygame.draw.line(self.window, color.LIGHT_BLUE, (i * 60, 0), (i * 60, 600), n)
-               
-            pygame.display.update()
 
             for i in range(10):
                 text, pos = util.text_object((i * 60 - 30, 30), '1', 35, color.BLACK)
                 self.window.blit(text, pos)
                 text, pos = util.text_object((30, i * 60 - 30), '1', 35, color.BLACK)
                 self.window.blit(text, pos)
-                # pygame.time.delay(100)
-                pygame.display.update()
             
-            positions = []
+            positions = [] #left, right, upper, down
             for i in range(1,10):
                 for j in range(1,10):
                     positions.append((60 * j - 60, 60 * j, 60 * i - 60, 60 * i))
 
-        print(positions)
+            mouse = pygame.mouse.get_pos()
+            for pos in positions:
+                if pos[0] < mouse[0] < pos[1] and pos[2] < mouse[1] < pos[3]:
+                    pygame.draw.rect(self.window, color.RED, (pos[0], pos[2], self.blockSize, self.blockSize), 2)
+
+            pygame.display.update()
