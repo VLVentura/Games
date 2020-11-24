@@ -21,6 +21,7 @@ class Board:
         self.selectBlockPosition = None
 
     def draw(self, mouse, click):
+        self.window.fill(color.FLAT_GREY)
         self.draw_selected_block(mouse, click)
         self.draw_grid()
         self.draw_red_block(mouse)
@@ -34,8 +35,9 @@ class Board:
             self.selectBlockPosition = None
 
         if self.mode == 1:
-            row, col = self.selectBlockPosition
-            self.board[row][col] = val
+            if val:
+                row, col = self.selectBlockPosition
+                self.board[row][col] = val
         elif self.mode == 2:
             if val:
                 row, col = self.selectBlockPosition

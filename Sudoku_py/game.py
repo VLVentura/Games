@@ -1,5 +1,7 @@
 import pygame
 
+import time
+
 import color
 import util
 from board import Board
@@ -9,6 +11,7 @@ class Game:
         pygame.init()
 
         self.window = pygame.display.set_mode((util.WINDOW_WIDTH, util.WINDOW_HEIGHT))
+        self.startTime = time.time()
 
         self.keysPressed = {
             pygame.K_1: 1, pygame.K_KP1: 1,
@@ -27,29 +30,20 @@ class Game:
         self.fps = 30
         self.clock = pygame.time.Clock()
 
-        self.blockSize = util.BLOCK_SIZE
-        
-        self.mode = None
-        self.selectedSquare = None
-
         self.board = Board(self.window)
 
     def init(self):
         while self.run:
-            pygame.display.set_caption('Sudoku')
+            pygame.display.set_caption('Sudoku - Time: {}'.format(self.time_elapsed(time.time() - self.startTime)))
 
             pygame.time.delay(50)
             self.clock.tick(self.fps)
-
-            self.window.fill(color.FLAT_GREY)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.run = False
             
-            val = self.player_input()
-            if val != None:
-                self.board.get_player_input(val)
+            self.board.get_player_input(self.player_input())
             self.board.draw(pygame.mouse.get_pos(), pygame.mouse.get_pressed())
 
             pygame.display.update()
@@ -62,5 +56,10 @@ class Game:
             if keys[key]:
                 val = self.keysPressed[key]
         
-        pygame.time.delay(40)
+        pygame.time.delay(45)
         return val
+    
+    def time_elapsed(self, sec):
+        minutes = int(sec // 60)
+        sec = int(sec % 60)
+        return '{}m{}s'.format(minutes, sec)
