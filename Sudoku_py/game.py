@@ -2,12 +2,26 @@ import pygame
 
 import color
 import util
+from board import Board
 
 class Game:
     def __init__(self):
         pygame.init()
 
         self.window = pygame.display.set_mode((util.WINDOW_WIDTH, util.WINDOW_HEIGHT))
+
+        self.keysPressed = {
+            pygame.K_1: 1, pygame.K_KP1: 1,
+            pygame.K_2: 2, pygame.K_KP2: 2,
+            pygame.K_3: 3, pygame.K_KP3: 3,
+            pygame.K_4: 4, pygame.K_KP4: 4,
+            pygame.K_5: 5, pygame.K_KP5: 5,
+            pygame.K_6: 6, pygame.K_KP6: 6,
+            pygame.K_7: 7, pygame.K_KP7: 7,
+            pygame.K_8: 8, pygame.K_KP8: 8,
+            pygame.K_9: 9, pygame.K_KP9: 9,
+            pygame.K_ESCAPE: 'clean'
+        }
 
         self.run = True
         self.fps = 30
@@ -17,6 +31,8 @@ class Game:
         
         self.mode = None
         self.selectedSquare = None
+
+        self.board = Board(self.window)
 
     def init(self):
         while self.run:
@@ -31,49 +47,20 @@ class Game:
                 if event.type == pygame.QUIT:
                     self.run = False
             
-            positions = [] #left, right, upper, down
-            for i in range(1,10):
-                for j in range(1,10):
-                    positions.append((60 * j - 60, 60 * j, 60 * i - 60, 60 * i))
-
-            mouse = pygame.mouse.get_pos()
-            click = pygame.mouse.get_pressed()
-
-            for pos in positions:
-                if pos[0] < mouse[0] < pos[1] and pos[2] < mouse[1] < pos[3]:
-                    if click[0]:
-                        self.mode = 1
-                        clr = color.TEAL
-                        self.selectedSquare = (pos[0], pos[2], self.blockSize, self.blockSize)
-                    elif click[2]:
-                        self.mode = 2
-                        clr = color.BLUE_GREY
-                        self.selectedSquare = (pos[0], pos[2], self.blockSize, self.blockSize)
-            
-            if self.mode != None:
-                pygame.draw.rect(self.window, clr, self.selectedSquare)
-
-            for i in range(0,10):
-                if i % 3 == 0:
-                    n = 3
-                else:
-                    n = 1
-                pygame.draw.line(self.window, color.LIGHT_BLUE, (0, i * 60), (600, i * 60), n)
-                pygame.draw.line(self.window, color.LIGHT_BLUE, (i * 60, 0), (i * 60, 600), n)
-
-            for pos in positions:
-                if pos[0] < mouse[0] < pos[1] and pos[2] < mouse[1] < pos[3]:
-                    pygame.draw.rect(self.window, color.RED, (pos[0], pos[2], self.blockSize, self.blockSize), 2)
-            
-            aux = 2
-            if self.mode == 2:
-                text, pos = util.text_object((self.selectedSquare[0] + 20 * aux - 10, self.selectedSquare[1] + 10), '1', 15, color.BLACK)
-                self.window.blit(text, pos)
-
-            for i in range(10):
-                text, pos = util.text_object((i * 60 - 30, 30), '1', 35, color.BLACK)
-                self.window.blit(text, pos)
-                text, pos = util.text_object((30, i * 60 - 30), '1', 35, color.BLACK)
-                self.window.blit(text, pos)
+            val = self.player_input()
+            if val != None:
+                self.board.get_player_input(val)
+            self.board.draw(pygame.mouse.get_pos(), pygame.mouse.get_pressed())
 
             pygame.display.update()
+    
+    def player_input(self):
+        val = None
+
+        keys = pygame.key.get_pressed()
+        for key in self.keysPressed.keys():
+            if keys[key]:
+                val = self.keysPressed[key]
+        
+        pygame.time.delay(40)
+        return val
