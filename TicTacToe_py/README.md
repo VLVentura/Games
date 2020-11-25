@@ -23,6 +23,10 @@ The CPU Hard option is an "IA" implemented with Minimax Algorithm. It's just an 
 
 History and score are opttions that show the last 5 games played and top 5 players with the best scores. They're implemented using the ```sqlite3``` module.
 
+#### Online
+
+The online option is not implemented YET! It's a future thing that i want to do.
+
 ### Music and images
 
 1) I got the images from [this](https://www.geeksforgeeks.org/tic-tac-toe-gui-in-python-using-pygame/) site.
