@@ -1,12 +1,13 @@
 # Tic Tac Toe
 
-Implemented with python
+Implemented with python and pygame.
 
 ### Demonstration
 
 <img src="img/demo.gif" width="400">
 
 ### How to run
+
 Replace the first line of ```main.py``` file for yours python3 interpreter.
 
 ```bash
@@ -21,7 +22,7 @@ The CPU Hard option is an "IA" implemented with Minimax Algorithm. It's just an 
 
 #### History and score
 
-History and score are opttions that show the last 5 games played and top 5 players with the best scores. They're implemented using the ```sqlite3``` module.
+History and score are options that show the last 5 games played and top 5 players with the best scores. They're implemented using the ```sqlite3``` module.
 
 #### Online
 
