@@ -8,9 +8,9 @@ It's a repository with simple and classic games that i'm trying to implement wit
 
 ## Python games
 
-1) [Instalation]()
-2) [How to run]()
-3) [Implemented games]()
+1) [Instalation](https://github.com/VLVentura/Games/tree#instalation)
+2) [How to run](https://github.com/VLVentura/Games/tree#how-to-run)
+3) [Implemented games](https://github.com/VLVentura/Games/tree#implemented-games)
 
 Games implemented with python, in general, uses pygame module. You can refer to a guide about this module [here](https://www.pygame.org/docs/index.html), to install pygame and run the games see the commands below.
 
