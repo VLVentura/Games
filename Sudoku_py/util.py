@@ -14,7 +14,7 @@ def create_board() -> list:
     board = generate_board()
     indexes = []
     
-    for i in range(30):
+    for i in range(35):
         while True:
             row = randint(0,8)
             col = randint(0,8)
