@@ -18,7 +18,7 @@ Replace the first line of ```main.py``` file for yours python3 interpreter.
 
 #### Sudoku solver
 
-If you press the space bar, the game will solver by itself. It's done by a Backtracking Algorithm, that you can read about [here](https://www.geeksforgeeks.org/sudoku-backtracking-7/)
+If you press the space bar, the game will rsolve by itself. It's done by a Backtracking Algorithm, that you can read about [here](https://www.geeksforgeeks.org/sudoku-backtracking-7/).
 
 #### Drawing things
 

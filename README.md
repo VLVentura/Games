@@ -31,6 +31,6 @@ Replace the first line of ```main.py``` file in game folder for yours python3 in
 
 ### Implemented games
 
-1) [Snake](https://github.com/VLVentura/Games/tree/main/Snake_py)
-2) [Tic Tac Toe](https://github.com/VLVentura/Games/tree/main/TicTacToe_py)
-3) [Sudoku](https://github.com/VLVentura/Games/tree/main/Sudoku_py)
+1) [Snake](https://github.com/VLVentura/Games/tree/main/Snake_py#snake)
+2) [Tic Tac Toe](https://github.com/VLVentura/Games/tree/main/TicTacToe_py#tic-tac-toe)
+3) [Sudoku](https://github.com/VLVentura/Games/tree/main/Sudoku_py#sudoku)
