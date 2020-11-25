@@ -30,6 +30,13 @@ class Board:
         self.draw_red_block(mouse)
         self.draw_board()
     
+    def draw_solver(self):
+        self.window.fill(color.FLAT_GREY)
+        self.draw_grid()
+        self.draw_board()
+        pygame.display.update()
+        pygame.time.delay(100)
+    
     def get_player_input(self, val):
         if val == 'clean':
             self.mode = None
@@ -47,9 +54,60 @@ class Board:
                 self.board[row][col] = 0
                 self.auxiliarBlocksList[(row, col)][val-1] = not self.auxiliarBlocksList[(row, col)][val-1]
     
-    def solver(self):
-        pass
+    def solver(self, board=None):
+        if board == None:
+            board = self.board
+
+        find = self.find_empty(board)
+        if not find:
+            return True
+        else:
+            row, col = find
+        
+        for i in range(1,10):
+            if self.valid(board, i, (row, col)):
+                board[row][col] = i
+
+                self.draw_solver()
+
+                if self.solver(board):
+                    return True
+                
+                board[row][col] = None
+
+                self.draw_solver()
+        
+        return False
     
+    def find_empty(self, board):
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] in [0, None]:
+                    return (i, j)
+        return None
+    
+    def valid(self, board, num, pos):
+        # Checking row
+        for i in range(9):
+            if board[pos[0]][i] == num and pos[1] != i:
+                return False
+        
+        # Checking column
+        for i in range(9):
+            if board[i][pos[1]] == num and pos[1] != i:
+                return False
+        
+        # Checking mini grid
+        x = pos[1] // 3
+        y = pos[0] // 3
+
+        for i in range(y * 3, 3 * (y + 1)):
+            for j in range(x * 3, 3 * (x + 1)):
+                if board[i][j] == num and (i, j) != pos:
+                    return False
+        
+        return True
+
     def is_full(self):
         for i in range(9):
             for j in range(9):

@@ -62,7 +62,6 @@ class Game:
                 self.solver = True
                 self.board.solver()
             
-
             pygame.display.update()
     
     def player_input(self):
