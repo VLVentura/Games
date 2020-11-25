@@ -100,5 +100,3 @@ class Board:
 
             if val:
                 self.window.blit(text, pos)
-
-

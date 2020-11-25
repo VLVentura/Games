@@ -1,5 +1,9 @@
 import pygame
 
+import collections
+from random import randint, shuffle
+from copy import deepcopy
+
 WINDOW_HEIGHT = 540
 WINDOW_WIDTH = 540
 N_BLOCKS = 9
@@ -7,9 +11,21 @@ N_BLOCKS = 9
 BLOCK_SIZE = WINDOW_WIDTH // N_BLOCKS
 
 def create_board() -> list:
-    board = []
-    for i in range(N_BLOCKS + 1):
-        board.append([None] * N_BLOCKS)
+    board = generate()
+    indexes = []
+    
+    for i in range(30):
+        while True:
+            row = randint(0,8)
+            col = randint(0,8)
+            if (row, col) not in indexes:
+                indexes.append((row, col))
+                break
+    
+    for index in indexes:
+        row, col = index
+        board[row][col] = None
+
     return board
 
 def board_positions() -> tuple:
@@ -58,3 +74,35 @@ def text_object(pos: tuple, text: str, size: int, color: tuple, font: str='freem
     rect.center = pos
 
     return (txt, rect)
+
+def shift(lst, n):
+    lst = collections.deque(lst)
+    lst.rotate(-n)
+    return list(lst)
+
+def generate():
+    board = []
+
+    main = [None] * 9
+    for i in range(9):
+        while True:
+            n = randint(1,9)
+            if n not in main:
+                main[i] = n
+                break
+
+    shuffle(main)
+    board.append(deepcopy(main))
+
+    for i in range(1,9):
+        temp = board[i-1]
+        if i % 3 != 0:
+            temp = shift(temp, 3)
+        else:
+            temp = shift(temp, 1)
+        board.append(deepcopy(temp))
+    
+    for l in board:
+        print(l)
+
+    return board
