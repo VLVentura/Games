@@ -172,7 +172,7 @@ class Game:
 
             
             for i, data in enumerate(self.db.read_from_match_history()):   
-                string = '{} [{}] vs. [{}] {}'.format(data[0], data[1], data[2], data[3])
+                string = '{} [{}] vs. [{}] {}'.format(data[0], data[1], data[3], data[2])
                 self.text, self.textRectangle = util.text_object((Game.WINDOW_WIDTH // 2, Game.WINDOW_HEIGHT // 3 + (i + 2) * 40), string, 30, color.RED)
                 self.window.blit(self.text, self.textRectangle)
 

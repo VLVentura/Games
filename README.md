@@ -21,7 +21,7 @@ pip install pygame
 ```
 
 ### How to run
-Replace the first line of the ```main.py``` file in game folder for yours python3 interpreter.
+Replace the first line of ```main.py``` file in game folder for yours python3 interpreter.
 
 * Obs: Games folders implemented with python ends with ```_py```
 
