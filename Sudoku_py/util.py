@@ -11,7 +11,7 @@ N_BLOCKS = 9
 BLOCK_SIZE = WINDOW_WIDTH // N_BLOCKS
 
 def create_board() -> list:
-    board = generate()
+    board = generate_board()
     indexes = []
     
     for i in range(30):
@@ -80,7 +80,7 @@ def shift(lst, n):
     lst.rotate(-n)
     return list(lst)
 
-def generate():
+def generate_board():
     board = []
 
     main = [None] * 9

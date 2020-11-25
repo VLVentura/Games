@@ -11,7 +11,9 @@ class Game:
         pygame.init()
 
         self.window = pygame.display.set_mode((util.WINDOW_WIDTH, util.WINDOW_HEIGHT))
+
         self.startTime = time.time()
+        self.timeElapsed = None
 
         self.keysPressed = {
             pygame.K_1: 1, pygame.K_KP1: 1,
@@ -23,8 +25,11 @@ class Game:
             pygame.K_7: 7, pygame.K_KP7: 7,
             pygame.K_8: 8, pygame.K_KP8: 8,
             pygame.K_9: 9, pygame.K_KP9: 9,
-            pygame.K_ESCAPE: 'clean'
+            pygame.K_ESCAPE: 'clean',
+            pygame.K_SPACE: 'solver'
         }
+
+        self.solver = False
 
         self.run = True
         self.fps = 30
@@ -34,7 +39,8 @@ class Game:
 
     def init(self):
         while self.run:
-            pygame.display.set_caption('Sudoku - Time: {}'.format(self.time_elapsed(time.time() - self.startTime)))
+            self.timeElapsed = self.time_elapsed(time.time() - self.startTime)
+            pygame.display.set_caption('Sudoku - Time: {}'.format(self.timeElapsed))
 
             pygame.time.delay(50)
             self.clock.tick(self.fps)
@@ -43,8 +49,19 @@ class Game:
                 if event.type == pygame.QUIT:
                     self.run = False
             
-            self.board.get_player_input(self.player_input())
-            self.board.draw(pygame.mouse.get_pos(), pygame.mouse.get_pressed())
+            playerInput = self.player_input()
+            if playerInput != 'solver' and self.solver == False:
+                self.board.get_player_input(playerInput)
+                self.board.draw(pygame.mouse.get_pos(), pygame.mouse.get_pressed())
+                if self.board.is_full():
+                    if self.board.has_won():
+                        pass
+                    else:
+                        pass
+            else:
+                self.solver = True
+                self.board.solver()
+            
 
             pygame.display.update()
     
@@ -60,6 +77,12 @@ class Game:
         return val
     
     def time_elapsed(self, sec):
-        minutes = int(sec // 60)
-        sec = int(sec % 60)
-        return '{}m{}s'.format(minutes, sec)
+        minutes = str(int(sec // 60))
+        sec = str(int(sec % 60))
+
+        if len(minutes) == 1:
+            minutes = '0' + minutes
+        if len(sec) == 1:
+            sec = '0' + sec
+
+        return '{}:{}'.format(minutes, sec)

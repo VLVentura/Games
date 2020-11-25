@@ -1,5 +1,7 @@
 import pygame
 
+from copy import deepcopy
+
 import util
 import color
 
@@ -8,6 +10,7 @@ class Board:
         self.window = window
 
         self.board = util.create_board()
+        self.originalBoard = deepcopy(self.board)
 
         self.blockSize = util.BLOCK_SIZE
         self.blocksPositions, self.gridPositions = util.board_positions()
@@ -43,6 +46,19 @@ class Board:
                 row, col = self.selectBlockPosition
                 self.board[row][col] = 0
                 self.auxiliarBlocksList[(row, col)][val-1] = not self.auxiliarBlocksList[(row, col)][val-1]
+    
+    def solver(self):
+        pass
+    
+    def is_full(self):
+        for i in range(9):
+            for j in range(9):
+                if self.board[i][j] in [0, None]:
+                    return False
+        return True
+    
+    def has_won(self):
+        pass
 
     def draw_grid(self):
         for i in range(util.N_BLOCKS + 1):
